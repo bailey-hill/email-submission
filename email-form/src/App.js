@@ -34,6 +34,16 @@ class App extends React.Component {
     }
   }
 
+  sendEmail(data) {
+    fetch('https://e6865glu98.execute-api.us-west-2.amazonaws.com/new-email-stage', {
+      method: 'POST',
+      mode: 'no-cors',
+      // headers: { 'Access-Control-Allow-Origin': 'http://localhost:3000/'},
+      body: JSON.stringify(data)
+    }).then(res => res.json())
+      .catch(err => console.error(err));
+  }
+
   handleSubmit(event) {
     event.preventDefault();
     const newSubmission = {
@@ -43,7 +53,7 @@ class App extends React.Component {
     };
     if (this.state.name.length && this.state.email.length &&
       this.state.message.length > 0) {
-      this.props.placeOrder(newSubmission);
+      this.sendEmail(newSubmission);
       this.setState({
         name: '',
         email: '',
