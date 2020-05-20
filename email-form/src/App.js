@@ -72,10 +72,13 @@ render() {
           <div className="text-left required text-general mt-1" style={{ visibility: this.state.message ? 'hidden' : 'visible' }}>
             A message is required.</div>
         </div>
-        <button variant="contained" color="primary" disabled={!(this.state.name
-        && this.state.email && this.state.message)}
-          className="w-25 mt-3 ml-3 btn btn-primary rounded-pill" onSubmit={this.handleSubmit}
-          type="submit" value="Submit">Send</button>
+        <div className="w-25 d-flex flex-row">
+          <input className="w-50 mr-1 mt-3 btn btn-light rounded-pill" type="reset" value="Cancel" />
+          <button variant="contained" color="primary" disabled={!(this.state.name
+            && this.state.email && this.state.message)}
+            className="w-50 mt-3 ml-1 btn btn-primary rounded-pill" onSubmit={this.handleSubmit}
+            type="submit" value="Submit">Send</button>
+        </div>
       </form>
     </div>
   );
