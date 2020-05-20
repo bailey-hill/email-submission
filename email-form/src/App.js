@@ -57,11 +57,20 @@ class App extends React.Component {
 render() {
   return (
     <div className="App">
-      <form onSubmit={this.handleSubmit} noValidate autoComplete="off" className="d-flex justify-content-center
+      <form onSubmit={this.handleSubmit} noValidate autoComplete="off" className="d-flex justify-content-start
       align-items-center flex-column">
-        <TextField id="name" onChange={this.handleChange} className="w-25"  label="Name" />
-        <TextField id="email" onChange={this.handleChange} className="w-25" label="Email" />
-        <TextField id="message" onChange={this.handleChange} className="w-25" label="Message" />
+        <div className="w-25">
+        <TextField id="name" onChange={this.handleChange} className="w-100"  label="Name" />
+          <div className="text-left required text-general mt-1" style={{ visibility: this.state.name ? 'hidden' : 'visible' }}>A name is required.</div>
+        </div>
+        <div className="w-25">
+        <TextField id="email" onChange={this.handleChange} className="w-100" label="Email" />
+          <div className="text-left required text-general mt-1" style={{ visibility: this.state.email ? 'hidden' : 'visible' }}>A name is required.</div>
+        </div>
+          <div className="w-25">
+        <TextField id="message" onChange={this.handleChange} className="w-100" label="Message" />
+          <div className="text-left required text-general mt-1" style={{ visibility: this.state.message ? 'hidden' : 'visible' }}>A name is required.</div>
+        </div>
         <button variant="contained" color="primary" disabled={!(this.state.name
         && this.state.email && this.state.message)}
           className="w-25 mt-3 ml-3 btn btn-primary rounded-pill" onSubmit={this.handleSubmit}
