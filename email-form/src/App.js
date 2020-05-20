@@ -40,8 +40,8 @@ class App extends React.Component {
     event.preventDefault();
     const newSubmission = {
       name: this.state.name,
-      creditCard: this.state.creditCard,
-      shippingAddress: this.state.shippingAddress
+      email: this.state.email,
+      message: this.state.message
     };
     if (this.state.name.length && this.state.email.length &&
       this.state.message.length > 0) {
@@ -57,11 +57,11 @@ class App extends React.Component {
 render() {
   return (
     <div className="App">
-      <form noValidate autoComplete="off" className="d-flex justify-content-center
+      <form onSubmit={this.handleSubmit} noValidate autoComplete="off" className="d-flex justify-content-center
       align-items-center flex-column">
-        <TextField className="w-25" id="standard-basic" label="Name" />
-        <TextField className="w-25" id="standard-basic" label="Email" />
-        <TextField className="w-25" id="standard-basic" label="Message" />
+        <TextField id="name" onChange={this.handleChange} className="w-25"  label="Name" />
+        <TextField id="email" onChange={this.handleChange} className="w-25" label="Email" />
+        <TextField id="message" onChange={this.handleChange} className="w-25" label="Message" />
         <button variant="contained" color="primary" disabled={!(this.state.name
         && this.state.email && this.state.message)}
           className="w-25 mt-3 ml-3 btn btn-primary rounded-pill" onSubmit={this.handleSubmit}
