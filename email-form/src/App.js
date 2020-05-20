@@ -56,7 +56,7 @@ render() {
   return (
     <div className="App">
       <form onSubmit={this.handleSubmit} noValidate autoComplete="off" className="d-flex justify-content-start
-      align-items-center flex-column">
+      align-items-center flex-column mt-2">
         <div className="w-25">
         <TextField id="name" onChange={this.handleChange} className="w-100"  label="Name" />
           <div className="text-left required text-general mt-1" style={{ visibility: this.state.name ? 'hidden' : 'visible' }}>A name is required.</div>
