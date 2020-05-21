@@ -2,10 +2,37 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import './App.css';
 
+const post = async (data) => {
+  const { url } = data;
+
+  delete data.url;
+
+  const params = {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    }
+  };
+
+  const response = await fetch(url, params);
+
+  if (response.status < 200 && response.status >= 300) {
+    const res = await response.json();
+
+    throw new Error(res);
+  }
+
+  return response.json();
+};
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      error: null,
+      submitted: false,
       name: '',
       email: '',
       message: ''
@@ -34,26 +61,36 @@ class App extends React.Component {
     }
   }
 
-  sendEmail(data) {
-    fetch('https://e6865glu98.execute-api.us-west-2.amazonaws.com/new-email-stage', {
-      method: 'POST',
-      mode: 'no-cors',
-      // headers: { 'Access-Control-Allow-Origin': 'http://localhost:3000/'},
-      body: JSON.stringify(data)
-    }).then(res => res.json())
-      .catch(err => console.error(err));
-  }
+  // sendEmail(data) {
+  //   fetch('https://e6865glu98.execute-api.us-west-2.amazonaws.com/new-email-stage', {
+  //     method: 'POST',
+  //     mode: 'no-cors',
+  //     // headers: { 'Access-Control-Allow-Origin': 'http://localhost:3000/'},
+  //     body: JSON.stringify(data)
+  //   }).then(res => res.json())
+  //     .catch(err => console.error(err));
+  // }
+
+
 
   handleSubmit(event) {
     event.preventDefault();
     const newSubmission = {
+      url: 'https://e6865glu98.execute-api.us-west-2.amazonaws.com/new-email-stage',
       name: this.state.name,
       email: this.state.email,
       message: this.state.message
     };
     if (this.state.name.length && this.state.email.length &&
       this.state.message.length > 0) {
-      this.sendEmail(newSubmission);
+      post(newSubmission)
+        .then(() => {
+          this.setState({ error: null, submitted: true });
+        })
+        .catch(error => {
+          this.setState({ error: error.message, submitted: false });
+        });
+    }
       this.setState({
         name: '',
         email: '',
@@ -61,7 +98,7 @@ class App extends React.Component {
       });
       event.currentTarget.reset();
     }
-  }
+
 render() {
   return (
     <div className="App">
