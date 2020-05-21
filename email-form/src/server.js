@@ -5,10 +5,9 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 5000;
 
-AWS.config.update({ region: 'eu-west-2' }); // Set the region that you configured in AWS
+AWS.config.update({ region: 'us-west-2' });
 
-// Our end-point for handling the enquiry request
-app.post('/api/contact', (req, res, next) => {
+app.post('https://e6865glu98.execute-api.us-west-2.amazonaws.com/new-email-stage', (req, res, next) => {
   return mailer.sendMail('baileyowenhill@gmail.com', ['reciever@email.com'], req.body)
     .then(() => res.send(req.body))
     .catch(next);
