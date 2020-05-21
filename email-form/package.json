@@ -2,6 +2,12 @@
   "name": "email-form",
   "version": "0.1.0",
   "private": true,
+    "description": "Simple email transmitter",
+    "memory": 128,
+    "timeout": 5,
+    "environment": {},
+    "runtime": "nodejs6.10",
+    "role": "email-role",
   "dependencies": {
     "@material-ui/core": "^4.9.14",
     "@testing-library/jest-dom": "^4.2.4",
