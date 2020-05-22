@@ -2,37 +2,16 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import './App.css';
 import apiKeys from './config.json'
-// import sendMail from './email.js';
-
 import AWS from 'aws-sdk';
-// import config from '../config.json';
+
 const SESConfig = {
   apiVersion: 'latest',
   accessKeyId: apiKeys.AWS_ACCESS_KEY,
   secretAccessKey: apiKeys.AWS_SECRET_KEY,
   region: apiKeys.region
 }
-// const aws = require('aws-sdk');
-// aws.config.loadFromPath("../config.json")
+
 const ses = new AWS.SES(SESConfig);
-// AWS.config.update({
-//   region: 'us-west-2',
-//   credentials: new AWS.CognitoIdentityCredentials({
-//     IdentityPoolId: apiKeys.AWS_POOL_ID
-//   })
-// });
-
-// var myCredentials = new AWS.CognitoIdentityCredentials({ IdentityPoolId: apiKeys.AWS_POOL_ID });
-// var myConfig = new AWS.Config({
-//   credentials: myCredentials, region: 'us-west-2'
-// });
-
-// AWS.config.update({
-//   region: 'us-east-2'
-// });
-
-
-// @param {*} callback
 
 var sendMail = function (callback, userInput) {
   var params = {};
@@ -57,42 +36,6 @@ var sendMail = function (callback, userInput) {
     }
   })
 }
-
-console.log(ses)
-
-// sendMail(function (err, data) {
-//   if (err) {
-//     console.log('send mail failed');
-//   } else {
-//     console.log('send mail succeeded');
-//   }
-// })
-
-// const post = async (data) => {
-//   const { url } = data;
-
-//   delete data.url;
-
-//   const params = {
-//     method: 'POST',
-//     body: JSON.stringify(data),
-//     headers: {
-//       'Content-Type': 'application/json',
-//       'Accept': 'application/json',
-//       'Access-Control-Allow-Origin': '*'
-//     }
-//   };
-
-//   const response = await fetch(url, params);
-
-//   if (response.status < 200 && response.status >= 300) {
-//     const res = await response.json();
-
-//     throw new Error(res);
-//   }
-
-//   return response.json();
-// };
 
 class App extends React.Component {
   constructor(props) {
@@ -146,13 +89,6 @@ class App extends React.Component {
           console.log('send mail succeeded');
         }
       }, newSubmission)
-      // post(newSubmission)
-      //   .then(() => {
-      //     this.setState({ error: null, submitted: true });
-      //   })
-      //   .catch(error => {
-      //     this.setState({ error: error.message, submitted: false });
-      //   });
     }
     this.setState({
       name: '',
