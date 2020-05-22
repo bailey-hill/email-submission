@@ -2,14 +2,13 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import './App.css';
-import apiKeys from './config.json'
 import AWS from 'aws-sdk';
 
 const SESConfig = {
   apiVersion: 'latest',
-  accessKeyId: apiKeys.AWS_ACCESS_KEY,
-  secretAccessKey: apiKeys.AWS_SECRET_KEY,
-  region: apiKeys.region
+  accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY,
+  secretAccessKey: process.env.REACT_APP_AWS_SECRET_KEY,
+  region: "us-west-2"
 }
 
 const ses = new AWS.SES(SESConfig);
@@ -89,7 +88,7 @@ class App extends React.Component {
         } else {
           console.log('send mail succeeded');
         }
-      }, newSubmission)
+      }, newSubmission);
     }
     this.setState({
       name: '',
