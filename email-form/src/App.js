@@ -65,13 +65,14 @@ class App extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     const newSubmission = {
-      url: 'https://e6865glu98.execute-api.us-west-2.amazonaws.com/new-email-stage',
+      url: '/new-email-stage',
       name: this.state.name,
       email: this.state.email,
       message: this.state.message
     };
     if (this.state.name.length && this.state.email.length &&
       this.state.message.length > 0) {
+      console.log(JSON.stringify(newSubmission));
       post(newSubmission)
         .then(() => {
           this.setState({ error: null, submitted: true });
