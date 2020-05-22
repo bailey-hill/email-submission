@@ -35,3 +35,5 @@ sendMail(function (err, data) {
     console.log('send mail succeeded');
     }
 })
+
+export default sendMail;
