@@ -1,5 +1,6 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 import './App.css';
 import apiKeys from './config.json'
 import AWS from 'aws-sdk';
@@ -119,13 +120,35 @@ class App extends React.Component {
               A message is required.</div>
           </div>
           <div className="w-25 d-flex flex-row">
-            <input className="w-50 mr-1 mt-3 btn btn-light rounded-pill" type="reset" value="Cancel" />
-            <button variant="contained" color="primary" disabled={!(this.state.name
+            <Button className="w-50 mr-1 mt-2" type="reset" variant="contained">
+              Cancel</Button>
+            <Button variant="contained" color="primary" disabled={!(this.state.name
               && this.state.email && this.state.message)}
-              className="w-50 mt-3 ml-1 btn btn-primary rounded-pill" onSubmit={this.handleSubmit}
-              type="submit" value="Submit">Send</button>
+              className="w-50 mt-2 ml-1" onSubmit={this.handleSubmit}
+              type="submit" value="Submit" data-toggle="modal" data-target="#exampleModal">
+              Send
+            </Button>
           </div>
         </form>
+        <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div className="modal-dialog" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="exampleModalLabel">Message received!</h5>
+                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div className="modal-body">
+            Thanks for your message! We will be in contact with you shortly.
+              </div>
+              <div className="modal-footer">
+                <Button variant="contained" type="button" className="btn btn-secondary"
+                data-dismiss="modal">Close</Button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
