@@ -1,0 +1,7 @@
+{
+  "Template": {
+    "TemplateName": "testtemplate",
+    "SubjectPart": "{{userName}}",
+    "TextPart": "{{message}}"
+  }
+}
