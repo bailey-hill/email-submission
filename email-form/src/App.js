@@ -85,8 +85,10 @@ class App extends React.Component {
       sendMail(function (err, data) {
         if (err) {
           console.log('send mail failed');
+          window.alert('Message failed. Please ensure email address is verified.');
         } else {
           console.log('send mail succeeded');
+          window.alert('Message received! We will be in contact with you shortly.')
         }
       }, newSubmission);
     }
@@ -101,6 +103,12 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+        <div className="alert alert-warning alert-dismissible fade show" role="alert">
+          <strong>Warning!</strong> Please ensure that email address is verified on AWS before sending.
+  <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
         <form onSubmit={this.handleSubmit} noValidate autoComplete="off" className="d-flex justify-content-start
       align-items-center flex-column mt-2">
           <div className="w-25">
@@ -129,25 +137,6 @@ class App extends React.Component {
             </Button>
           </div>
         </form>
-        <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div className="modal-dialog" role="document">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title" id="exampleModalLabel">Message received!</h5>
-                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div className="modal-body">
-            Thanks for your message! We will be in contact with you shortly.
-              </div>
-              <div className="modal-footer">
-                <Button variant="contained" type="button" className="btn btn-secondary"
-                data-dismiss="modal">Close</Button>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     );
   }
